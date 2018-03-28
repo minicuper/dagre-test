@@ -1,0 +1,35 @@
+@require './formHelper'
+
+_color = $main
+_placeholder = $second
+_font = $InputFont
+_line = $InputLine
+_paddingTop = $InputPaddingTop
+_paddingBottom = $InputPaddingBottom
+
+all-text-inputs()
+  return '[type="email"], [type="number"], [type="password"], [type="search"], [type="tel"], [type="text"], [type="url"], textarea'
+
+C = all-text-inputs()
+
+{C}
+  display block
+  outline 0
+  width 100%
+  background white
+  font-size _font
+  line-height _line
+  padding gutter(s)
+  color _color
+  TextInputStyle()
+  &::-webkit-input-placeholder
+    color _placeholder
+    line-height normal
+
+  &[type='number']
+    width 7em
+    max-width 100%
+    display inline-block
+    text-align right
+    &.-small
+      width 3em

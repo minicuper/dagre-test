@@ -1,0 +1,11 @@
+_border = rgba(black, 0.2)
+_focus = $first
+_borderSize = 1px
+_borderRadius = 2px
+
+TextInputStyle()
+  border _borderSize solid _border
+  border-radius _borderRadius
+  transition border 0.3s ease
+  &:focus
+    border-color _focus

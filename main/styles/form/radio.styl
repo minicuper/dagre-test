@@ -1,0 +1,32 @@
+C = "[type='radio']"
+
+_color = $first
+
+{C}
+  appearance none
+  border 2px solid $second
+  height 20px
+  width 20px
+  border-radius 50%
+  transition border 0.3s
+  cursor pointer
+  background white
+  margin-top gutter(s)
+  margin-bottom @margin-top
+
+  &:focus
+    outline none
+  &:checked
+    background _color
+    border-color _color
+    background radial-gradient(circle, _color 0px, _color 5px, rgba(black, 0) 6px, rgba(black, 0) 100%)
+
+  label &
+    margin-right 0.5em
+    vertical-align middle
+    position relative
+    bottom 2px
+  &[disabled]
+    cursor not-allowed
+    label:not(.-disabled) &
+      opacity 0.4

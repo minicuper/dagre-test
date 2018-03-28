@@ -1,0 +1,184 @@
+$InputHeight = 30px
+$InputFont = font()
+$InputLine = 1.4 // Same as editor
+$InputLineHeight = $InputFont * $InputLine
+$InputBorderSize = 1px
+$InputBorderRadius = 2px
+$InputPaddingTop = ($InputHeight - $InputLineHeight - $InputBorderSize * 2) / 2 - 1
+$InputPaddingBottom = ($InputHeight - $InputLineHeight - $InputBorderSize * 2) / 2 + 1
+$InputCheckboxSize = 16px
+
+_errorSize = 24px
+
+@require './checkbox'
+@require './radio'
+@require './select'
+@require './switch-design'
+@require './text'
+
+_getErrorIcon(color, svg = '')
+  svg = 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" enable-background="new 0 0 512 512"><path fill="%s" d="m507.641,431.876l-224-384.002c-5.734-9.828-16.258-15.875-27.641-15.875-11.383,0-21.906,6.047-27.641,15.875l-224,384.002c-5.773,9.898-5.813,22.125-0.109,32.063 5.711,9.938 16.289,16.063 27.75,16.063h448.001c11.461,0 22.039-6.125 27.75-16.063 5.703-9.938 5.664-22.165-0.11-32.063zm-251.641-15.878c-17.656,0-32-14.328-32-32 0-17.672 14.344-32 32-32 17.688,0 32,14.328 32,32 0,17.671-14.312,32-32,32zm32-127.998c0,17.672-14.328,32-32,32s-32-14.328-32-32v-96c0-17.672 14.328-32 32-32s32,14.328 32,32v96z"/></svg>'
+  svg = s(svg, unquote('' + color))
+  svg = "url('" + svg + "')"
+  return unquote(svg)
+
+label.-disabled
+  opacity 0.4
+  cursor not-allowed
+
+// dm-form styles override
+C = '.Input'
+
+div{C}.-columns
+  display block
+  position relative
+  //DMSection()
+  //DMSection-zebra()
+
+  &.-error
+    box-shadow inset 0 0 5px $error
+
+  {C}-error
+    position absolute
+    right gutter(xs)
+    top gutter(xs)
+    width _errorSize
+    height @width
+    background-image _getErrorIcon(#b41a1a)
+    background-repeat no-repeat
+    background-position center
+
+  {C}-left
+    padding 0
+    min-width 0
+    max-width none
+  {C}-right
+    padding 0
+  {C}-label
+    margin-bottom gutter(s)
+    font-weight 600
+    font-size font()
+    color $main
+  {C}-description
+    order -1
+    margin-bottom gutter(s)
+    margin-top 0
+    U-small()
+  {C}-input:focus ~ {C}-description
+    color $secondary
+
+  &.-checkbox:not(.-multiple)
+    {C}-label
+      margin-bottom 0
+    {C}-description
+      order 0
+      margin-bottom 0
+
+  &.-checkbox
+    {C}-input
+      bottom 0
+
+    &:not(.-table)
+      {C}-checkboxWrapper:not(.-horizontal)
+        flex-direction column
+
+        label + label
+          margin-top gutter(s)
+
+  {C}-checkboxWrapper
+    display flex
+
+    &.-horizontal
+      flex-wrap wrap
+
+      label
+        margin-right gutter()
+
+    label
+      cursor pointer
+      font-size font(s)
+
+  {C}-input
+    &.-radio
+    &.-readonly
+      font-size font()
+
+
+
+    label
+      cursor pointer
+
+  &.-text
+  &.-textarea
+  &.-number
+  &.-checkbox
+
+    {C}-label
+      cursor pointer
+
+  {C}-tip
+    font-size font(s)
+    font-style italic
+    margin-bottom gutter()
+    width 100%
+
+{C}-input
+  &.-rank
+    display flex
+    flex-direction column
+
+    {C}-option
+      display flex
+      align-items center
+      padding-top gutter(xs)
+      padding-bottom @padding-top
+      position relative
+      cursor move
+
+      &.-moved
+        color $first
+        background $bgSecond
+        z-index 10
+
+      &.-focused
+        &:after
+          content ''
+          top 0
+          left 0
+          background $first
+          height 2px
+          position absolute
+          width 100%
+
+      &.-last
+        &:after
+          top auto
+          bottom -1px
+
+    {C}-optionIndex
+      display flex
+      justify-content center
+      align-items center
+      width 19px
+      height @width
+      font-size font(s)
+      border-radius 50%
+      background-color $first
+      color $darkMain
+      margin-right gutter(s)
+      flex-shrink 0
+      U-strong()
+
+    {C}-optionName
+      flex-shrink 0
+
+  &.-selectGroup
+    display flex
+    flex-direction column
+
+    select + select
+      margin-top gutter()
+
+{C}-html
+  padding-top gutter()
+  padding-bottom @padding-top

@@ -1,0 +1,36 @@
+_transformedViewBoxXY(rotate)
+  if rotate is 90 or rotate is -270
+    return '-$2 0'
+  else if rotate is 180 or rotate is -180
+    return '-$2 -$3'
+  else if rotate is 270 or -90
+    return '0 -$3'
+  else
+    return '0 0'
+
+_getIcon(svg, color, rotate)
+  svg = replace('xmlns', "fill=%22%s%22 xmlns", svg)
+  svg = s(svg, unquote('' + color))
+  if rotate
+    rotate = unit(rotate, '')
+    // replace <svg ...> with <svg ...><g transform='rotate(%s)'>
+    // transform=%22rotate(%s)%22 rotate(45 50 50)
+    svg = replace('(%3Csvg.*?(?:%3E))', '$1%3Cg transform=%22rotate(%s 0 0)%22%3E', svg)
+    // replace %s with the actual rotate value
+    svg = s(svg, rotate)
+    // Change viewbox in order to account for the rotated image
+    // (Since the transformation anchor point is 0 0, the images is going to be
+    // out of the viewBox, so it needs to be adjusted)
+    svg = replace('(viewBox=...)0 0 ([\d\.]+) ([\d\.]+)(...)', '$1' + _transformedViewBoxXY(rotate) + ' $2 $3$4', svg)
+    // replace </svg> with </g></svg>
+    svg = replace('(%3C/svg%3E)', '%3C/g%3E$1', svg)
+  return unquote(svg)
+
+getIcon(name, color, rotate)
+  color = s('rgba(%s,%s,%s,%s)', red(color), green(color), blue(color), alpha(color))
+  return _getIcon(embedurl('../icons/' + name + '.svg', 'utf8'), color, rotate)
+
+icon(name, color = black, rotate = false)
+  background-image getIcon(name, color, rotate)
+  background-repeat no-repeat
+  background-position center center

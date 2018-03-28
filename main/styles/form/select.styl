@@ -1,0 +1,47 @@
+_color = $main
+_bgColor = white // #dedee2 for grey select
+_border = $bgFourth // _bgColor for grey select
+_focus = $first
+_font = $InputFont
+_line = $InputLine
+_borderSize = $InputBorderSize
+_borderRadius = $InputBorderRadius
+_paddingTop = $InputPaddingTop
+_paddingBottom = $InputPaddingBottom
+
+_getSelectIcon(color, svg = '')
+  svg = 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" fill="%s" viewBox="0 0 16 16"><path d="M8 13l8-10H0l8 10z"/></svg>'
+  svg = s(svg, unquote('' + color))
+  svg = "url('" + svg + "')"
+  return unquote(svg)
+
+select
+  background _bgColor
+  border _borderSize solid _border
+  appearance none
+  padding _paddingTop 30px _paddingBottom gutter(s)
+  background-image _getSelectIcon(_color)
+  background-size 10px
+  background-repeat no-repeat
+  background-position right 10px center
+  border-radius _borderRadius
+  outline none
+  transition border 0.3s ease
+  font-size _font
+  line-height _line
+  color _color
+  // font-weight 600
+  white-space normal
+  &:focus
+    border-color _focus
+
+select
+  &.-flat
+    font-size 1em
+    color inherit
+    padding 0 18px 0 0
+    border none
+    white-space pre-line
+
+  &.-wide
+    width 100%

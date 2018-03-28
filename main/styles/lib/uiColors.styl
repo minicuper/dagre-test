@@ -1,0 +1,81 @@
+// ----- Abstract palette ----- //
+
+$first          ?= $blue
+$second         ?= $gray
+$third          ?= $green
+$fourth         ?= $blue
+
+$firstDim       ?= $lightBlue
+$secondDim      ?= $lightGray
+$thirdDim       ?= $lightBlue
+$fourthDim      ?= $whiteGray //$lightTeal
+
+// Same colors on dark background
+$darkFirst      ?= lighten($first, 40%)
+$darkSecond     ?= lighten($gray, 20%)
+$darkThird      ?= $darkFirst
+
+// ----- Text ----- //
+
+$main           ?= $black
+
+// example: descriptions on light background
+$secondary      ?= $gray
+
+// example: text on dark background
+$darkMain       ?= $white
+
+// example: description on dark background
+$darkSecondary  ?= rgba(white, .35)
+
+// example: <h1>, <h2>, ..., <h6>
+$heading        ?= $main
+
+// example: <a>
+$link           ?= $first
+
+// example: <a> on dark background
+$darkLink       ?= $darkFirst
+
+// ----- Backgrounds ----- //
+
+// example: page background
+$bgFirst        ?= $lightGray
+
+// example: card background
+$bgSecond       ?= $white
+
+// example: section headers background
+$bgThird        ?= $lightGray2 // $mediumTeal
+
+// exmaple: table headers background
+$bgFourth       ?= $lightGray2
+
+// example: topbar in fullscreen layout, 'important sidebar' content background
+$darkBgFirst    ?= $darkBlack
+
+// example: 'important sidebar' header backgrounds
+$darkBgSecond   ?= $darkDeep
+
+// example: 'secondary sidebar' content background
+$darkBgThird    ?= $darkBlack
+
+$borderBgFirst  ?= $lightGray
+$borderBgSecond  ?= $blackGray
+$shadow         ?= rgba(black, .12)
+
+// deprecated: use $borderBgFirst
+$borderBg       ?= $borderBgFirst
+
+// ----- Color coded stuff ----- //
+
+$attention      ?= $first
+
+$info           ?= $blue
+$infoBg         ?= $lightBlue
+
+$error          ?= $red
+$errorBg        ?= $lightRed
+
+$success        ?= $green
+$successBg      ?= $lightGreen

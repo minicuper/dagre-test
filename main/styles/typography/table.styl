@@ -1,0 +1,190 @@
+_border = 1px solid rgba($second, .4)
+_borderLighter = 1px solid rgba($second, .2)
+_borderLight = none // 1px solid darken(white, 2%)
+_theadBg = $white
+_theadColor = $main
+_navHeight = 50px
+_navHighlight = rgba(black, 0.1)
+_headerHeight = 36px
+_headerFontSize = 14px
+_headerFontWeight = 700
+
+// General
+
+// General
+
+thead th
+  padding 5px 10px
+
+tbody
+  td, th
+    padding 5px 10px
+    text-align left
+thead
+  text-transform uppercase
+  color _theadColor
+  font-size font(xs)
+
+
+table
+  border-collapse separate
+  border-spacing 0
+  border _borderLighter
+  width 100%
+  &.-large
+    td, th
+      padding-top gutter(s)
+      padding-bottom gutter(s)
+
+  &.-fancy
+    thead
+      color $main
+      text-transform none
+      font-size 20px
+
+      th
+        background-color $bgFirst
+        font-weight 600
+
+    tbody
+      tr:hover td
+        background $infoBg
+      td, th
+        color $main
+
+th
+  text-align left
+  font-weight normal
+  &[colspan]
+    text-align left
+  thead &
+    font-weight bold
+
+// Color
+
+table
+  background-color white
+  &.-transparent
+    background-color transparent
+
+    thead
+      background-color transparent
+    thead th
+      background-color transparent
+    tbody
+      th, td
+        background-color transparent
+
+thead
+  background-color _theadBg
+thead th
+  background-color _theadBg
+tbody
+  th, td
+    background-color white
+
+// Borders
+// Have to omit using "border-collapse collapse" to work around missing
+// borders when doing transform on thead
+
+table-borders()
+  td, th
+    border-right _border
+    border-bottom _border
+    thead tr:first-child &:first-child, tbody &:first-child
+      border-left _border
+    thead tr:first-child &
+      border-top _border
+
+table-dimmer-borders()
+  td, th
+    border-top _borderLighter
+    //border-right _borderLight
+    thead &
+      //border-right _border
+      //border-bottom _border
+    //thead tr:first-child &:first-child, tbody &:first-child
+    //  border-left _border
+    thead tr:first-child &
+      border-top none
+  td:last-child
+    //border-right _border
+
+// ----------------------------
+//   Default Table
+// ----------------------------
+
+table-dimmer-borders()
+
+// ----------------------------
+//   Modificators
+// ----------------------------
+
+table.-nav
+  box-shadow 0 6px 5px -3px rgba(0,0,0,.2)
+  thead
+    border-bottom _borderLighter
+  thead th, tbody td
+    position relative
+    padding gutter() gutter(l)
+  td
+    height _navHeight
+    border-left none
+    border-right none
+    font-size font(s)
+    vertical-align center
+  tbody tr
+    cursor pointer
+    &:hover
+      td
+        background-image linear-gradient(to right, _navHighlight, _navHighlight)
+  thead th
+    text-transform none
+    height _headerHeight
+    font-weight normal
+    font-size font(s)
+
+tr
+  &.-selected
+    background #f1f4ff
+  &.-problematic
+    border-left 3px solid red
+
+td, th
+
+  &.-narrow
+    width 1%
+
+  &.-center
+    text-align center !important
+
+  &.-nowrap
+    white-space nowrap
+    text-overflow ellipsis
+
+  &.-medium
+    min-width 6em
+    max-width 8em
+
+  &.-big
+    min-width 8em
+    max-width 12em
+
+  &.-biggest
+    min-width 10em
+    max-width 14em
+
+  &.-left
+    text-align left !important
+
+  &.-right
+    text-align right !important
+
+  &.-image
+    font-size 0
+
+  &.-hackCenterText
+    line-height 0
+
+  &.-pointer
+    cursor pointer

@@ -1,0 +1,13 @@
+{
+  "APP": "testapp",
+  "STAGE": "development",
+  "NODE_ENV": "development",
+  "PORT": 3000,
+  "BASE_URL": "http://localhost:3000",
+  "REDIS_URL": "redis://localhost:6379/1",
+  "MONGO_URL": "mongodb://localhost:27017/testapp",
+  "SESSION_SECRET": "174260657a5469h536eo172aoerw117an",
+  "ADMINS": [],
+  "COPY_TO_ENV": ["NODE_ENV", "PORT"],
+  "PUBLIC": ["PUBLIC", "NODE_ENV", "STAGE", "APP", "BASE_URL"]
+}

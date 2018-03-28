@@ -1,0 +1,42 @@
+C = "[type='checkbox']"
+
+_checkColor = #ffffff
+_checkBg = #53565a
+_color = $main
+_border = _checkBg
+_focus = $first
+_borderRadius = $InputBorderRadius
+_checkboxSize = $InputCheckboxSize
+_borderSize = 1px
+
+{C}:not(.Switch)
+  -webkit-appearance none
+  border _borderSize solid _border
+  width _checkboxSize
+  height @width
+  border-radius _borderRadius
+  cursor pointer
+  transition background 0.3s
+  background-color white
+  &:focus
+    outline none
+    border _borderSize solid _focus
+  &:checked
+    background-color _checkBg
+    background-size cover
+    border none
+    icon('check', _checkColor)
+  .U-white &
+    border-color white
+  label &
+    margin-right 0.5em
+    vertical-align middle
+    position relative
+    bottom 2px
+  &[disabled]
+    cursor not-allowed
+    background-color rgba(black, 0.15)
+    &:checked
+      background-color rgba(_checkBg, 0.5)
+    label:not(.-disabled) &
+      opacity 0.4

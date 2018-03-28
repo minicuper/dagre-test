@@ -1,0 +1,84 @@
+appearance()
+  -webkit-appearance arguments
+  -moz-appearance arguments
+  appearance arguments
+
+// Taken from ionicframework
+
+optimizations()
+  -webkit-touch-callout none
+  -webkit-font-smoothing antialiased
+  font-smoothing antialiased
+  text-size-adjust none
+  -webkit-tap-highlight-color transparent
+  word-wrap break-word
+  text-rendering optimizeLegibility
+  -webkit-backface-visibility hidden
+  -webkit-user-drag none
+
+// @media
+
+from(num)
+  condition = 'screen and (min-width: %s)' % num
+  @media condition
+    {block}
+
+to(num)
+  condition = 'screen and (max-width: %s)' % ((num - 1))
+  @media condition
+    {block}
+
+between(num1, num2)
+  condition = 'screen and (min-width: %s) and (max-width: %s)' % (num1 (num2 - 1))
+  @media condition
+    {block}
+
+// Creates keyframes for 2 animations: "name" and "name-copy".
+// This is required to restart the animation on an element.
+keyframes-duplicate(name)
+  @keyframes name
+    {block}
+  nameCopy = '%s-copy' % name
+  @keyframes nameCopy
+    {block}
+
+// Switching between 2 classes with different animation names for the same
+// animation.
+transition-switch-animation(animation, sec)
+  &.-transition1
+    animation animation sec
+  &.-transition2
+    animation '%s-copy %s' % (animation sec)
+
+underline(color = black, opacity = .4)
+  background-image linear-gradient(to top, rgba(color,0) 11%, rgba(color,opacity) 11%, rgba(color,opacity) 16%, rgba(color,0) 16%)
+
+$sectionTitleColor = rgba(black, 0.3)
+
+bleed(left = gutter(), right = left)
+  padding-left left
+  padding-right right
+  margin-left (- left)
+  margin-right (- right)
+
+sectionTitleWithLine(left = gutter(), right = gutter())
+  font-weight bold
+  color $sectionTitleColor
+  text-transform uppercase
+  font-style italic
+  padding-top gutter(s)
+  margin-bottom gutter(s)
+  border-top 1px solid rgba(black, 0.1)
+  bleed(left, right)
+
+sectionTitleWithLine2(left = gutter(), right = gutter())
+  padding-bottom gutter()
+  border-bottom 1px solid rgba(black, 0.1)
+  bleed(left, right)
+
+editorElementsMargin(size = gutter())
+  p, ul, ol, li, table
+    &:not(:last-child)
+      margin-bottom size
+    &:not(:first-child)
+      margin-top size
